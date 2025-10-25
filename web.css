@@ -1,0 +1,131 @@
+/* styles.css - Custom styles for UniVerse layout */
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root{
+    --indigo-500: #4f46e5;
+    --indigo-600: #4338ca;
+    --indigo-400: #6366f1;
+    --gray-100: #f3f4f6;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --bg: #f7f7f7;
+    --scroll-thumb: #3b82f6;
+    --scroll-track: #e5e7eb;
+    --red-100: #fee2e2;
+    --red-400: #f87171;
+    --red-500: #ef4444;
+}
+
+/* Base */
+html,body{
+    height:100%;
+    margin:0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+/* Webkit scrollbar */
+::-webkit-scrollbar { width: 8px; height:8px; }
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-thumb);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-track { background-color: var(--scroll-track); }
+
+/* Card hover elevation used across event / campus cards */
+.card-shadow {
+    transition: all 0.3s ease;
+    will-change: transform, box-shadow;
+}
+.card-shadow:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 15px -3px rgba(0,0,0,0.1),
+        0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+/* Modal overlay & content */
+.modal-overlay {
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+    /* By default handled via utility classes / JS: hidden + opacity:0
+         When visible JS sets opacity:1 and removes .hidden */
+}
+
+.modal-content {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    /* Starting state: slightly translated down and transparent.
+         JS will animate this to translateY(0) when showing. */
+    transform: translateY(40px);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* If you want a pure-CSS visible class for the modal */
+.modal-overlay.visible { opacity: 1; }
+.modal-overlay.visible .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Error message inside modal */
+.error-message {
+    color: var(--red-500);
+    background-color: var(--red-100);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--red-400);
+    font-size: 0.875rem;
+}
+
+/* Category chips (same styles as dynamic JS-produced rules) */
+.category-chip {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--gray-300);
+    background-color: #ffffff;
+    color: var(--gray-600);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: inline-block;
+    user-select: none;
+    line-height: 1;
+}
+.category-chip:hover {
+    background-color: var(--gray-100);
+    border-color: var(--gray-400);
+}
+
+/* Active chip */
+.active-chip {
+    background-color: var(--indigo-500);
+    color: #ffffff;
+    border-color: var(--indigo-500);
+}
+.active-chip:hover {
+    background-color: var(--indigo-600);
+    border-color: var(--indigo-600);
+}
+
+/* Small utility (used by header/profile dropdown markup) */
+.truncate { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Optional accessibility focus for interactive elements not covered by Tailwind */
+button:focus, .category-chip:focus, input:focus {
+    outline: 3px solid rgba(79,70,229,0.15);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
+}
+
+/* Minor helpers to match original visual rhythm */
+.rounded-2xl { border-radius: 1rem; }
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
